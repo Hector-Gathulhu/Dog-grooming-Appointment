@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+
 @RestController
 @RequestMapping("/api/v1/appointment")
 public class DogAppointmentController {
@@ -60,7 +61,7 @@ public class DogAppointmentController {
     }
 
 
-    @DeleteMapping("{id}/delete")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteAppointment(@PathVariable Long id) {
 
         try {
