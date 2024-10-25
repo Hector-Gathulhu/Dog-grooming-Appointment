@@ -9,6 +9,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 
 @Entity(name = "appointment")
 @NoArgsConstructor
@@ -19,19 +21,20 @@ public class DogAppointment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
-    @Column(length=10)
-    private String ownerPhone;
+
+    @ManyToOne
+    @JoinColumn(name = "owner_id")
+    @JsonIgnoreProperties({"dogs", "name", "phone", "email", "dogAppointments"})
+    private Owner owner;
+
+    @ManyToOne
+    @JoinColumn(name = "dog_id")
+    @JsonIgnoreProperties({"owner","dogAppointments"})
+    private Dog dog;
+
     @Enumerated(EnumType.STRING)
     private BathType bathType;
 
-    //Add ownerID
-    @ManyToOne
-    @JoinColumn(name = "owner_id")
-    @JsonIgnoreProperties({"dogs","name", "phone", "email", "dogAppointments"})
-    private Owner owner;
-    @ManyToOne
-    @JoinColumn(name = "dog_id")
-    @JsonIgnore
-    private Dog dog;
+    @JoinColumn(name = "date_appoint")
+    private LocalDateTime dateTime;
 }

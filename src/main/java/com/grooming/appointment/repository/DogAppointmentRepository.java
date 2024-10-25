@@ -16,8 +16,8 @@ import java.util.Optional;
 public interface DogAppointmentRepository extends JpaRepository<DogAppointment,Long> {
 
     //JPQL(Java Persistence Query Language)
-    @Query("SELECT d FROM appointment d WHERE LOWER(d.name) LIKE LOWER(CONCAT('%', :name, '%'))")
-    Optional<List<DogAppointment>> findByNameContaining(String name);
+//    @Query("SELECT d FROM appointment d WHERE LOWER(d.name) LIKE LOWER(CONCAT('%', :name, '%'))")
+//    Optional<List<DogAppointment>> findByNameContaining(String name);
 
     @Modifying
     @Transactional
