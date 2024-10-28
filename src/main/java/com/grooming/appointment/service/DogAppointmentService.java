@@ -34,21 +34,22 @@ public class DogAppointmentService {
         Dog dog = dogRepository.findById(dogAppointmentDto.dogId())
                 .orElseThrow(() -> new IllegalArgumentException("Dog not found"));
 
-        if (!owner.getPhone().equals(dogAppointmentDto.ownerPhone())) {
-            throw new IllegalArgumentException("The phone provied doesn't match with the owner's information!");
-        }
-
-        if (!dog.getName().equals(dogAppointmentDto.name())) {
-            throw new IllegalArgumentException("The name provied doesn't match with the owner's information!");
-        }
+//        if (!owner.getPhone().equals(dogAppointmentDto.ownerPhone())) {
+//            throw new IllegalArgumentException("The phone provied doesn't match with the owner's information!");
+//        }
+//
+//        if (!dog.getName().equals(dogAppointmentDto.name())) {
+//            throw new IllegalArgumentException("The name provied doesn't match with the owner's information!");
+//        }
 
 
         DogAppointment dogAppointment = new DogAppointment();
-        dogAppointment.setName(dogAppointmentDto.name());
-        dogAppointment.setOwnerPhone(dogAppointmentDto.ownerPhone());
+//        dogAppointment.setName(dogAppointmentDto.name());
+//        dogAppointment.setOwnerPhone(dogAppointmentDto.ownerPhone());
         dogAppointment.setBathType(dogAppointmentDto.bathType());
         dogAppointment.setOwner(owner);
         dogAppointment.setDog(dog);
+        dogAppointment.setDateTime(dogAppointmentDto.dateTime());
         return dogAppointmentRepository.save(dogAppointment);
     }
 
@@ -56,21 +57,24 @@ public class DogAppointmentService {
         return dogAppointmentRepository.findAll();
     }
 
-    public Optional<List<DogAppointment>> getAppointmentByName(String name) {
-        return dogAppointmentRepository.findByNameContaining(name);
-    }
+//    public Optional<List<DogAppointment>> getAppointmentByName(String name) {
+//        return dogAppointmentRepository.findByNameContaining(name);
+//    }
 
     public DogAppointment updateAppointment(Long id, DogAppointmentDto dogUpdateDto) {
         DogAppointment dogAppointment = dogAppointmentRepository.findById(id).orElseThrow(RuntimeException::new);
         Owner owner = ownerRepository.findById(dogUpdateDto.ownerId())
                 .orElseThrow(() -> new IllegalArgumentException("Owner not found"));
+        Dog dog= dogRepository.findById(dogUpdateDto.dogId())
+                .orElseThrow(() -> new IllegalArgumentException("Dog not found"));
 
-        if (!owner.getPhone().equals(dogUpdateDto.ownerPhone())) {
-            throw new IllegalArgumentException("The phone provied doesn't match with the owner's information!");
-        }
+//        if (!owner.getPhone().equals(dogUpdateDto.ownerPhone())) {
+//            throw new IllegalArgumentException("The phone provied doesn't match with the owner's information!");
+//        }
 
-        dogAppointment.setName(dogUpdateDto.name());
-        dogAppointment.setOwnerPhone(dogUpdateDto.ownerPhone());
+//        dogAppointment.setName(dogUpdateDto.name());
+//        dogAppointment.setOwnerPhone(dogUpdateDto.ownerPhone());
+        dogAppointment.setDog(dogAppointment.getDog());
         dogAppointment.setBathType(dogUpdateDto.bathType());
         dogAppointment.setOwner(dogAppointment.getOwner());
 

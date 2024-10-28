@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+
 @RestController
 @RequestMapping("/api/v1/appointment")
 public class DogAppointmentController {
@@ -38,15 +39,15 @@ public class DogAppointmentController {
         return ResponseEntity.ok(getDogsAppointments);
     }
 
-    @GetMapping("/search/{name}")
-    public ResponseEntity<List<DogAppointment>> getAppointmentByName(@PathVariable String name) {
-        Optional<List<DogAppointment>> dogAppointment = dogAppointmentService.getAppointmentByName(name);
-        if (dogAppointment.isPresent()) {
-            return ResponseEntity.ok(dogAppointment.get());
-        } else {
-            return ResponseEntity.notFound().build();
-        }
-    }
+//    @GetMapping("/search/{name}")
+//    public ResponseEntity<List<DogAppointment>> getAppointmentByName(@PathVariable String name) {
+//        Optional<List<DogAppointment>> dogAppointment = dogAppointmentService.getAppointmentByName(name);
+//        if (dogAppointment.isPresent()) {
+//            return ResponseEntity.ok(dogAppointment.get());
+//        } else {
+//            return ResponseEntity.notFound().build();
+//        }
+//    }
 
     @PutMapping("{id}/update")
     public ResponseEntity<?> updateDogAppointment(@PathVariable Long id, @RequestBody @Valid DogAppointmentDto dogUpdateDto) {
@@ -60,7 +61,7 @@ public class DogAppointmentController {
     }
 
 
-    @DeleteMapping("{id}/delete")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteAppointment(@PathVariable Long id) {
 
         try {
