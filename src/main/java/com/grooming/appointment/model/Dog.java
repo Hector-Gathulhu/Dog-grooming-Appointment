@@ -25,7 +25,7 @@ public class Dog {
 
     @ManyToOne
     @JoinColumn(name="owner_id")
-    @JsonIgnoreProperties({"dogs","name", "phone", "email", "dogAppointments"})
+    @JsonIgnoreProperties("dogAppointments")
     private Owner owner;
     @OneToMany(mappedBy = "dog",
             cascade = CascadeType.ALL,

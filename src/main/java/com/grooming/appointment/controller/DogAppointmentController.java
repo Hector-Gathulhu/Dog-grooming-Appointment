@@ -39,6 +39,13 @@ public class DogAppointmentController {
         return ResponseEntity.ok(getDogsAppointments);
     }
 
+    @GetMapping("/appointments/{id}")
+    public ResponseEntity<DogAppointment> getAppointmentById(@PathVariable Long id){
+        DogAppointment appointment = dogAppointmentService.findAppointment(id);
+
+        return ResponseEntity.ok(appointment);
+    }
+
 //    @GetMapping("/search/{name}")
 //    public ResponseEntity<List<DogAppointment>> getAppointmentByName(@PathVariable String name) {
 //        Optional<List<DogAppointment>> dogAppointment = dogAppointmentService.getAppointmentByName(name);
@@ -49,7 +56,9 @@ public class DogAppointmentController {
 //        }
 //    }
 
-    @PutMapping("{id}/update")
+
+
+    @PutMapping("/update/{id}")
     public ResponseEntity<?> updateDogAppointment(@PathVariable Long id, @RequestBody @Valid DogAppointmentDto dogUpdateDto) {
 
         try {

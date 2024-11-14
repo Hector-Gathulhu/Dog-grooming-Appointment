@@ -57,6 +57,13 @@ public class DogAppointmentService {
         return dogAppointmentRepository.findAll();
     }
 
+    public DogAppointment findAppointment(Long id) {
+        DogAppointment dogAppointment = dogAppointmentRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("The appointment doesn't exist, ID: " + id));
+
+        return dogAppointment;
+    }
+
 //    public Optional<List<DogAppointment>> getAppointmentByName(String name) {
 //        return dogAppointmentRepository.findByNameContaining(name);
 //    }
@@ -89,5 +96,6 @@ public class DogAppointmentService {
 
         return dogAppointment;
     }
+
 
 }
